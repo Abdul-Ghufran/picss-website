@@ -66,21 +66,46 @@ that is the point of the 503.
 
 Consider adding rate limiting at the platform edge before launch; the route has none.
 
-## Deploying
+## Deploying to Vercel
 
-The project is a standard Next.js 16 App Router app and deploys as-is to Vercel (zero
-config) or any Node host via `npm run build && npm start`. One dynamic route
-(`/api/enquiry`) means a static export is not possible without dropping the form.
+Vercel builds Next.js with zero configuration. `vercel.json` sets the framework and pins
+Vercel Functions to `bom1` (Mumbai) — the closest compute region to Pakistan, instead of the
+`iad1` default in Washington. Static pages are served from Vercel's global PoPs either way;
+the region only affects `/api/enquiry`.
 
-Pre-launch checklist:
+Node is pinned through `engines.node` in `package.json` (`>=20.9.0 <25`).
 
-1. `NEXT_PUBLIC_SITE_URL` set to the real origin.
-2. `PICSS_ENQUIRY_WEBHOOK` set, and a test enquiry actually received.
-3. `docs/CONTENT-STATUS.md` walked through with PICSS; confirmed destinations filled into
-   `src/content/site.ts` (replace `href: null`).
-4. An Open Graph share image added, and the share card previewed.
-5. Vector logo obtained and swapped in, if available.
-6. `robots.txt` and `sitemap.xml` checked against the live origin.
+### First deployment
+
+1. Push `main` to GitHub (already done: `Abdul-Ghufran/picss-website`, private).
+2. At [vercel.com/new](https://vercel.com/new), import the repository. Grant the Vercel
+   GitHub app access to it — the repo is private, so it will not appear otherwise.
+3. Vercel detects Next.js. Leave the build and output settings untouched.
+4. **Before clicking Deploy**, add the environment variable
+   `NEXT_PUBLIC_SITE_URL` = `https://<your-project>.vercel.app`.
+   This is not optional detail: `NEXT_PUBLIC_*` values are inlined **at build time** and
+   drive the canonical URL, Open Graph tags, `robots.txt` and `sitemap.xml`. Setting it
+   afterwards does nothing until the project is rebuilt.
+5. Deploy.
+
+Leave `PICSS_ENQUIRY_WEBHOOK` unset until PICSS confirms a destination. Until it is set,
+`/api/enquiry` returns 503 and the contact form tells visitors to email `info@picss.net`.
+
+### Plan note
+
+Vercel's fair-use guidelines count "getting paid to build or host a site" as commercial use,
+which requires Pro. The Hobby (free) plan is appropriate for a client **preview**; a paid
+production deployment should run on Pro, or on an account owned by PICSS.
+
+### Custom domain
+
+Add the domain under Project → Settings → Domains, point DNS at Vercel, then update
+`NEXT_PUBLIC_SITE_URL` to the real origin and **redeploy** so the metadata is rebuilt.
+
+### Redeploying after an env var change
+
+Project → Deployments → the latest one → Redeploy. A restart is not enough for
+`NEXT_PUBLIC_*` values.
 
 ## Updating content
 
