@@ -52,7 +52,7 @@
   --step-3: clamp(1.73rem, 1.5rem + 1vw, 2.37rem);
   --step-4: clamp(2.07rem, 1.72rem + 1.52vw, 3.05rem);
   --step-5: clamp(2.49rem, 1.95rem + 2.3vw, 3.9rem);
-  --step-6: clamp(2.99rem, 2.17rem + 3.5vw, 5rem);
+  --step-6: clamp(2.6rem, 1.85rem + 3.2vw, 5rem);
 
   /* Hairlines — the structural signature of the design */
   --rule-on-dark: rgba(233, 236, 244, 0.14);
@@ -185,6 +185,13 @@ body {
   outline: 2px solid var(--color-picss-sky);
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+/* Guarantees a 44px pointer target without changing visual size */
+.touch-target {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 /* Editorial underline that draws in on hover/focus */

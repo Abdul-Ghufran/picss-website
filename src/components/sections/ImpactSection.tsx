@@ -62,7 +62,7 @@ export function ImpactSection() {
                 {item.description}
               </p>
 
-              <p className="mt-7 inline-flex items-center gap-2.5 text-[0.7rem] tracking-[0.1em] text-on-light-muted/80 uppercase">
+              <p className="mt-7 inline-flex items-center gap-2.5 text-[0.7rem] tracking-[0.1em] text-on-light-muted uppercase">
                 <span aria-hidden className="size-1.5 rounded-full bg-picss-red/70" />
                 Awaiting verified records
               </p>

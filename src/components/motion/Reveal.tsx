@@ -43,7 +43,9 @@ export function Reveal({
       whileInView="visible"
       viewport={amount ? { once: true, amount } : viewport}
       variants={resolve(variants, prefersReduced)}
-      transition={delay && !prefersReduced ? { delay } : undefined}
+      // Guard the falsy-zero case: `delay && ...` would pass the number 0 as the
+      // transition and clobber the variant's own timing.
+      transition={delay > 0 && !prefersReduced ? { delay } : undefined}
     >
       {children}
     </MotionTag>

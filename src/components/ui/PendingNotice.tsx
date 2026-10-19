@@ -23,7 +23,10 @@ export function PendingNotice({ label, children, tone = "dark", className }: Pen
         className,
       )}
     >
-      <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-picss-red" />
+      <Info
+        aria-hidden
+        className={cn("mt-0.5 size-4 shrink-0", isDark ? "text-picss-red" : "text-picss-red-deep")}
+      />
       <div className="space-y-2">
         <p className={cn("eyebrow", isDark ? "text-on-dark" : "text-on-light")}>{label}</p>
         <div className="measure text-[length:var(--step--1)] leading-relaxed">{children}</div>

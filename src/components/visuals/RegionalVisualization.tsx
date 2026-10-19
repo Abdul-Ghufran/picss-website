@@ -67,8 +67,8 @@ export function RegionalVisualization({ className }: { className?: string }) {
       >
         <defs>
           <radialGradient id={`${uid}-glow`} cx="50%" cy="45%" r="55%">
-            <stop offset="0%" stopColor="#3D2B9B" stopOpacity="0.42" />
-            <stop offset="60%" stopColor="#3D2B9B" stopOpacity="0.1" />
+            <stop offset="0%" stopColor="#3D2B9B" stopOpacity="0.55" />
+            <stop offset="60%" stopColor="#3D2B9B" stopOpacity="0.16" />
             <stop offset="100%" stopColor="#3D2B9B" stopOpacity="0" />
           </radialGradient>
           <linearGradient id={`${uid}-sweep`} x1="0" y1="0" x2="1" y2="1">
@@ -92,7 +92,7 @@ export function RegionalVisualization({ className }: { className?: string }) {
             cy={CY}
             r={r}
             stroke="#5CBDE0"
-            strokeOpacity={i === 0 ? 0.14 : 0.08}
+            strokeOpacity={i === 0 ? 0.24 : 0.14}
             strokeWidth={1}
             strokeDasharray={i === 0 ? "2 10" : undefined}
             initial={{ opacity: 0, scale: 0.94 }}
@@ -108,8 +108,8 @@ export function RegionalVisualization({ className }: { className?: string }) {
           cy={CY}
           r={R}
           stroke="#5CBDE0"
-          strokeOpacity={0.4}
-          strokeWidth={1.25}
+          strokeOpacity={0.6}
+          strokeWidth={1.4}
           initial={{ pathLength: 0, opacity: 0 }}
           animate={draw(0.15, 1.6)}
         />
@@ -124,8 +124,8 @@ export function RegionalVisualization({ className }: { className?: string }) {
               rx={rx}
               ry={R}
               stroke="#5CBDE0"
-              strokeOpacity={0.16}
-              strokeWidth={0.9}
+              strokeOpacity={0.28}
+              strokeWidth={1}
               initial={{ pathLength: 0, opacity: 0 }}
               animate={draw(0.3 + i * 0.07, 1.3)}
             />
@@ -142,8 +142,8 @@ export function RegionalVisualization({ className }: { className?: string }) {
                 x2={CX + halfWidth}
                 y2={CY + dy}
                 stroke="#5CBDE0"
-                strokeOpacity={dy === 0 ? 0.3 : 0.14}
-                strokeWidth={dy === 0 ? 1.1 : 0.9}
+                strokeOpacity={dy === 0 ? 0.48 : 0.24}
+                strokeWidth={dy === 0 ? 1.2 : 1}
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={draw(0.42 + i * 0.07, 1.1)}
               />
@@ -156,8 +156,8 @@ export function RegionalVisualization({ className }: { className?: string }) {
               key={`c-${k}`}
               d={contour(CX - 20, CY + 10, R * k)}
               stroke="#B9D5DE"
-              strokeOpacity={0.12}
-              strokeWidth={0.9}
+              strokeOpacity={0.24}
+              strokeWidth={1}
               initial={{ pathLength: 0, opacity: 0 }}
               animate={draw(0.7 + i * 0.12, 1.5)}
             />
@@ -188,8 +188,8 @@ export function RegionalVisualization({ className }: { className?: string }) {
             x2={nodes[b].x}
             y2={nodes[b].y}
             stroke="#B9D5DE"
-            strokeOpacity={0.3}
-            strokeWidth={0.85}
+            strokeOpacity={0.5}
+            strokeWidth={1}
             initial={{ pathLength: 0, opacity: 0 }}
             animate={draw(1 + i * 0.08, 0.9)}
           />
@@ -204,16 +204,23 @@ export function RegionalVisualization({ className }: { className?: string }) {
             transition={{ duration: prefersReduced ? 0 : 0.5, ease: EASE, delay: prefersReduced ? 0 : 1.25 + i * 0.07 }}
             style={{ transformOrigin: `${node.x}px ${node.y}px` }}
           >
-            {i === 0 && !prefersReduced && (
+            {/*
+              Deliberately NOT a red alert marker. A pulsing red dot on a globe reads as a
+              live incident pin, which this graphic must never imply. The focal node is a
+              quiet ring in the analytical sky tone instead.
+            */}
+            {i === 0 && (
               <circle
                 cx={node.x}
                 cy={node.y}
-                r={node.r * 3}
-                fill="#DC2A1C"
-                style={{ animation: "picss-pulse-dot 3.4s ease-in-out infinite", transformOrigin: `${node.x}px ${node.y}px` }}
+                r={node.r * 2.6}
+                fill="none"
+                stroke="#5CBDE0"
+                strokeOpacity={0.5}
+                strokeWidth={0.9}
               />
             )}
-            <circle cx={node.x} cy={node.y} r={node.r} fill={i === 0 ? "#DC2A1C" : "#B9D5DE"} />
+            <circle cx={node.x} cy={node.y} r={node.r} fill={i === 0 ? "#5CBDE0" : "#B9D5DE"} />
           </motion.g>
         ))}
 
@@ -228,7 +235,7 @@ export function RegionalVisualization({ className }: { className?: string }) {
             key={`r-${x}-${y}`}
             d={`M ${x} ${y + 18 * sy} L ${x} ${y} L ${x + 18 * sx} ${y}`}
             stroke="#E9ECF4"
-            strokeOpacity={0.22}
+            strokeOpacity={0.34}
             strokeWidth={1}
             initial={{ pathLength: 0, opacity: 0 }}
             animate={draw(1.5, 0.6)}

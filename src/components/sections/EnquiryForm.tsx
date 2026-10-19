@@ -105,7 +105,7 @@ export function EnquiryForm() {
   }
 
   const inputClass =
-    "focus-ring min-h-12 w-full border-b border-[color:var(--rule-on-dark-strong)] bg-transparent px-0 py-3 text-[length:var(--step-0)] text-on-dark transition-colors duration-300 placeholder:text-on-dark-muted/50 hover:border-[color:var(--rule-on-dark)] focus:border-picss-sky";
+    "focus-ring min-h-12 w-full border-b border-[color:var(--rule-on-dark-strong)] bg-transparent px-0 py-3 text-[length:var(--step-0)] text-on-dark transition-colors duration-300 placeholder:text-on-dark-muted hover:border-[color:var(--rule-on-dark)] focus:border-picss-sky";
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-7">

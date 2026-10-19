@@ -23,9 +23,15 @@ export const transitionFast: Transition = {
   ease: EASE,
 };
 
-/** Default viewport config for scroll reveals. */
-export const viewport = { once: true, amount: 0.25 } as const;
-export const viewportLoose = { once: true, amount: 0.15 } as const;
+/**
+ * Default viewport config for scroll reveals.
+ *
+ * `amount` is kept low and the bottom margin pulled in so a reveal fires slightly
+ * before the element is fully on screen. Tall elements (a full section heading on a
+ * short viewport) can never satisfy a high threshold, which would strand them hidden.
+ */
+export const viewport = { once: true, amount: 0.15, margin: "0px 0px -8% 0px" } as const;
+export const viewportLoose = { once: true, amount: 0.05, margin: "0px 0px -5% 0px" } as const;
 
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -42,22 +48,28 @@ export const fadeRight: Variants = {
   visible: { opacity: 1, x: 0, transition },
 };
 
-/** Editorial mask reveal — the content slides up from behind a clipped edge. */
+/**
+ * Editorial mask reveal — the content rises from behind its own edge.
+ *
+ * Implemented with transform only: the caller wraps this in an `overflow-hidden`
+ * element, which does the masking. An earlier clip-path version did not animate
+ * reliably (the fully-clipped hidden state meant the reveal never triggered), and
+ * transforms are cheaper to composite besides.
+ */
 export const maskUp: Variants = {
-  hidden: { opacity: 0, y: "35%", clipPath: "inset(100% 0% 0% 0%)" },
+  hidden: { opacity: 0, y: "100%" },
   visible: {
     opacity: 1,
     y: "0%",
-    clipPath: "inset(0% 0% 0% 0%)",
     transition: { duration: 0.9, ease: EASE },
   },
 };
 
-/** Image reveal — the frame wipes open, the image settles back from a slight scale. */
+/** Image reveal — the image settles back from a slight scale as it fades up. */
 export const imageReveal: Variants = {
-  hidden: { clipPath: "inset(0% 0% 100% 0%)", scale: 1.08 },
+  hidden: { opacity: 0, scale: 1.07 },
   visible: {
-    clipPath: "inset(0% 0% 0% 0%)",
+    opacity: 1,
     scale: 1,
     transition: { duration: 1, ease: EASE },
   },
@@ -78,8 +90,8 @@ export const staggerParent = (stagger = 0.07, delayChildren = 0.05): Variants =>
 
 /** Reduced-motion equivalents: state changes, no movement. */
 export const reduced: Variants = {
-  hidden: { opacity: 1, y: 0, x: 0, scale: 1, clipPath: "inset(0% 0% 0% 0%)", scaleX: 1 },
-  visible: { opacity: 1, y: 0, x: 0, scale: 1, clipPath: "inset(0% 0% 0% 0%)", scaleX: 1, transition: { duration: 0 } },
+  hidden: { opacity: 1, y: 0, x: 0, scale: 1, scaleX: 1 },
+  visible: { opacity: 1, y: 0, x: 0, scale: 1, scaleX: 1, transition: { duration: 0 } },
 };
 
 /** Pick the right variant set for the user's motion preference. */

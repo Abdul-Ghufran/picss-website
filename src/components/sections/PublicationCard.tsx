@@ -30,8 +30,11 @@ export function PublicationCard({ publication, featured = false }: PublicationCa
       transition={{ duration: 0.35, ease: EASE }}
       className={cn("group flex h-full flex-col", featured && "sm:flex-row sm:gap-10")}
     >
-      {/* Cover */}
-      <div className={cn("shrink-0", featured ? "sm:w-[44%] lg:w-[46%]" : "")}>
+      {/*
+        Cover. The supplied artwork is roughly 360-400px wide, so the rendered box is
+        capped well below that to keep the covers crisp rather than upscaled.
+      */}
+      <div className={cn("shrink-0", featured ? "sm:w-[38%] sm:max-w-[22rem]" : "max-w-[18rem]")}>
         <div className="relative overflow-hidden bg-ivory-dim">
           <motion.div
             variants={resolve(imageReveal, prefersReduced)}
@@ -42,7 +45,7 @@ export function PublicationCard({ publication, featured = false }: PublicationCa
                 src={publication.cover}
                 alt={publication.coverAlt}
                 fill
-                sizes={featured ? "(max-width: 640px) 100vw, 40vw" : "(max-width: 640px) 100vw, 25vw"}
+                sizes={featured ? "(max-width: 640px) 90vw, 352px" : "(max-width: 640px) 90vw, 288px"}
                 className="object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
               />
             ) : (
@@ -63,7 +66,7 @@ export function PublicationCard({ publication, featured = false }: PublicationCa
       {/* Record */}
       <div className={cn("flex flex-1 flex-col pt-6", featured && "sm:pt-2")}>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-          <span className="eyebrow text-picss-red">{publication.category}</span>
+          <span className="eyebrow text-picss-red-deep">{publication.category}</span>
           {publication.date && (
             <span className="numeral text-[0.7rem] text-on-light-muted">{publication.date}</span>
           )}
@@ -89,11 +92,11 @@ export function PublicationCard({ publication, featured = false }: PublicationCa
 
         <div className="mt-auto pt-6">
           {publication.attribution && (
-            <p className="text-[0.74rem] text-on-light-muted/85">{publication.attribution}</p>
+            <p className="text-[0.74rem] text-on-light-muted">{publication.attribution}</p>
           )}
 
           {publication.href === null ? (
-            <p className="mt-3 inline-flex items-center gap-2 text-[0.72rem] text-on-light-muted/80">
+            <p className="mt-3 inline-flex items-center gap-2 text-[0.72rem] text-on-light-muted">
               <Lock aria-hidden className="size-3" />
               Link to be confirmed by PICSS
             </p>

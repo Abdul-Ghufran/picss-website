@@ -36,7 +36,14 @@ export function SectionHeading({
   return (
     <div className={cn(className)}>
       <Reveal className="flex items-center gap-4">
-        <span className="numeral text-[0.7rem] font-medium text-picss-red">{index}</span>
+        <span
+          className={cn(
+            "numeral text-[0.7rem] font-medium",
+            tone === "dark" ? "text-picss-red" : "text-picss-red-deep",
+          )}
+        >
+          {index}
+        </span>
         <span className={cn("eyebrow", muted)}>{eyebrow}</span>
       </Reveal>
 

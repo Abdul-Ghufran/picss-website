@@ -100,21 +100,27 @@ export function HeroSection() {
                 />
               </Link>
 
-              {heroActions.slice(1).map((action) => (
-                <Link
-                  key={action.label}
-                  href={action.href ?? "#contact"}
-                  className="focus-ring inline-flex min-h-12 items-center rounded-[3px] border border-[color:var(--rule-on-dark-strong)] px-7 text-sm font-medium text-on-dark transition-colors duration-300 hover:border-picss-sky hover:text-picss-sky"
-                >
-                  {action.label}
-                </Link>
-              ))}
+              {/* Secondary action keeps a frame; the third drops to a text link so the
+                  row holds one line and the hierarchy stays legible. */}
+              <Link
+                href={heroActions[1].href ?? "#publications"}
+                className="focus-ring inline-flex min-h-12 items-center rounded-[3px] border border-[color:var(--rule-on-dark-strong)] px-7 text-sm font-medium text-on-dark transition-colors duration-300 hover:border-picss-sky hover:text-picss-sky"
+              >
+                {heroActions[1].label}
+              </Link>
+
+              <Link
+                href={heroActions[2].href ?? "#contact"}
+                className="focus-ring link-underline ml-1 inline-flex min-h-12 items-center text-sm font-medium text-on-dark-muted transition-colors duration-300 hover:text-on-dark"
+              >
+                {heroActions[2].label}
+              </Link>
             </motion.div>
 
             {/* Institutional credentials strip — all three facts are in the source file */}
             <motion.dl
               variants={v}
-              className="mt-14 grid max-w-xl grid-cols-3 gap-6 border-t border-[color:var(--rule-on-dark)] pt-7"
+              className="mt-10 grid max-w-xl grid-cols-3 gap-5 border-t border-[color:var(--rule-on-dark)] pt-6 sm:gap-6 lg:mt-14"
             >
               {[
                 { term: "Status", detail: "Independent, not-for-profit" },
@@ -134,11 +140,11 @@ export function HeroSection() {
           {/* ------------------------------------------- Visualisation column */}
           <motion.div
             variants={prefersReduced ? still : { hidden: { opacity: 0, scale: 0.96 }, visible: { opacity: 1, scale: 1, transition: { duration: 1.1, ease: EASE } } }}
-            className="relative col-span-12 mt-16 lg:col-span-5 lg:mt-0 xl:col-span-6"
+            className="relative col-span-12 mt-10 lg:col-span-5 lg:mt-0 xl:col-span-6"
           >
-            <RegionalVisualization className="mx-auto max-w-[34rem] lg:max-w-none" />
+            <RegionalVisualization className="mx-auto max-w-[19rem] sm:max-w-[26rem] lg:max-w-none" />
 
-            <p className="mt-2 text-center text-[0.7rem] leading-relaxed text-on-dark-muted/70 lg:text-right">
+            <p className="mt-2 text-center text-[0.7rem] leading-relaxed text-on-dark-muted lg:text-right">
               Illustrative research graphic — not a live incident map and not derived from
               incident data.
             </p>

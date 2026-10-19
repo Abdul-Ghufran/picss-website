@@ -53,7 +53,7 @@ export function DatabaseSection() {
 
                 <DataLattice />
 
-                <p className="mt-6 border-t border-[color:var(--rule-on-dark)] pt-5 text-[0.72rem] leading-relaxed text-on-dark-muted/75">
+                <p className="mt-6 border-t border-[color:var(--rule-on-dark)] pt-5 text-[0.72rem] leading-relaxed text-on-dark-muted">
                   Schematic representation of how the database is organised — incidents
                   resolved across time and geography. It contains no incident data, counts or
                   locations, and is not a live dashboard.

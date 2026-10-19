@@ -11,7 +11,7 @@ export function SiteFooter() {
         <div className="picss-grid">
           {/* Identity */}
           <div className="col-span-12 lg:col-span-4">
-            <Wordmark width={160} />
+            <Wordmark variant="full" height={96} />
             <p className="measure-tight mt-7 text-[length:var(--step--1)] leading-relaxed text-on-dark-muted">
               {organisation.summary}
             </p>
@@ -19,12 +19,12 @@ export function SiteFooter() {
             <address className="mt-7 space-y-2 text-[length:var(--step--1)] not-italic text-on-dark-muted">
               <p>{organisation.city}</p>
               <p>
-                <a href={organisation.phoneHref} className="focus-ring link-underline numeral">
+                <a href={organisation.phoneHref} className="focus-ring link-underline touch-target numeral">
                   {organisation.phone}
                 </a>
               </p>
               <p>
-                <a href={organisation.emailHref} className="focus-ring link-underline">
+                <a href={organisation.emailHref} className="focus-ring link-underline touch-target">
                   {organisation.email}
                 </a>
               </p>
@@ -59,16 +59,16 @@ export function SiteFooter() {
         {/* Research disclaimer — supplied verbatim by the client */}
         <div className="mt-16 border-t border-[color:var(--rule-on-dark)] pt-10">
           <h2 className="eyebrow text-on-dark-muted">Research disclaimer</h2>
-          <p className="mt-4 max-w-4xl text-[0.78rem] leading-[1.75] text-on-dark-muted/85">
+          <p className="mt-4 max-w-4xl text-[0.78rem] leading-[1.75] text-on-dark-muted">
             {researchDisclaimer}
           </p>
         </div>
 
         <div className="mt-10 flex flex-col gap-4 border-t border-[color:var(--rule-on-dark)] pt-7 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-[0.75rem] text-on-dark-muted/80">
+          <p className="text-[0.75rem] text-on-dark-muted">
             © {year} {organisation.name}. All rights reserved.
           </p>
-          <p className="numeral text-[0.68rem] tracking-[0.14em] text-on-dark-muted/60 uppercase">
+          <p className="numeral text-[0.68rem] tracking-[0.14em] text-on-dark-muted uppercase">
             {organisation.city}
           </p>
         </div>

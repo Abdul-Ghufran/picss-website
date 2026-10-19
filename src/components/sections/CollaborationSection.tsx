@@ -38,7 +38,7 @@ export function CollaborationSection() {
                   variants={fadeRight}
                   className="flex gap-4 border-t border-[color:var(--rule-on-light)] py-4 text-[length:var(--step--1)] leading-relaxed text-on-light"
                 >
-                  <span className="numeral shrink-0 pt-0.5 text-[0.68rem] text-picss-red">
+                  <span className="numeral shrink-0 pt-0.5 text-[0.68rem] text-picss-red-deep">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   {area}
@@ -72,7 +72,7 @@ export function CollaborationSection() {
                     <dd className="mt-2">
                       <a
                         href={organisation.emailHref}
-                        className="focus-ring link-underline text-[length:var(--step-0)] font-medium text-on-light"
+                        className="focus-ring link-underline touch-target text-[length:var(--step-0)] font-medium text-on-light"
                       >
                         {organisation.email}
                       </a>
@@ -83,7 +83,7 @@ export function CollaborationSection() {
                     <dd className="mt-2">
                       <a
                         href={organisation.phoneHref}
-                        className="focus-ring link-underline numeral text-[length:var(--step-0)] text-on-light"
+                        className="focus-ring link-underline touch-target numeral text-[length:var(--step-0)] text-on-light"
                       >
                         {organisation.phone}
                       </a>

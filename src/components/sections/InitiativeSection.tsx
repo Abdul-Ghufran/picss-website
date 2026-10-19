@@ -49,7 +49,7 @@ export function InitiativeSection() {
                       {initiative.title}
                     </h3>
                     {initiative.meta && (
-                      <p className="numeral mt-3 text-[0.7rem] tracking-[0.1em] text-picss-red uppercase">
+                      <p className="numeral mt-3 text-[0.7rem] tracking-[0.1em] text-picss-red-deep uppercase">
                         {initiative.meta}
                       </p>
                     )}

@@ -110,7 +110,7 @@ export function SiteHeader() {
           className="focus-ring flex shrink-0 items-center"
           aria-label={`${organisation.shortName} — home`}
         >
-          <Wordmark width={scrolled ? 108 : 124} priority className="transition-all duration-500" />
+          <Wordmark height={scrolled ? 30 : 36} priority className="transition-all duration-500" />
         </Link>
 
         <nav aria-label="Primary" className="hidden lg:block">

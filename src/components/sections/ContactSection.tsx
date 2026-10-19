@@ -62,7 +62,7 @@ export function ContactSection() {
                           {detail.href ? (
                             <a
                               href={detail.href}
-                              className="focus-ring link-underline"
+                              className="focus-ring link-underline touch-target"
                               {...(detail.href.startsWith("http")
                                 ? { target: "_blank", rel: "noreferrer" }
                                 : {})}

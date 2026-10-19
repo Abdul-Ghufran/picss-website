@@ -69,7 +69,7 @@ export function ActionButton({
           id={`pending-${slug(action.label)}`}
           className={cn(
             "eyebrow text-[0.65rem] tracking-[0.14em]",
-            tone === "dark" ? "text-on-dark-muted/70" : "text-on-light-muted/80",
+            tone === "dark" ? "text-on-dark-muted" : "text-on-light-muted",
           )}
         >
           {action.pendingNote ?? "Destination to be confirmed"}

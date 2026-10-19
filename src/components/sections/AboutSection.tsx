@@ -61,7 +61,7 @@ export function AboutSection() {
 
         {/* Identity line */}
         <Reveal className="mt-16 flex flex-wrap items-baseline gap-x-4 gap-y-2 border-t border-[color:var(--rule-on-light)] pt-7">
-          <span className="eyebrow text-picss-red">{organisation.shortName}</span>
+          <span className="eyebrow text-picss-red-deep">{organisation.shortName}</span>
           <span className="text-[length:var(--step--1)] text-on-light-muted">
             {organisation.name} · {organisation.city}
           </span>
