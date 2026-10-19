@@ -1,0 +1,298 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   PICSS design tokens
+   Palette sampled directly from the official logo (assets/picss logo.jpeg):
+   red #DC2A1C · indigo #3D2B9B · sky #5CBDE0
+   ========================================================================== */
+
+@theme {
+  /* Brand */
+  --color-picss-red: #dc2a1c;
+  --color-picss-red-deep: #b21f14;
+  --color-picss-indigo: #3d2b9b;
+  --color-picss-sky: #5cbde0;
+  --color-picss-sky-dim: #3f93b4;
+
+  /* Dark surfaces — indigo-tinted ink, never neutral black */
+  --color-ink-900: #070b18;
+  --color-ink-800: #0c1226;
+  --color-ink-700: #141c38;
+  --color-ink-600: #1e2847;
+
+  /* Light surfaces — warm, never pure white by default */
+  --color-ivory: #f5f3ee;
+  --color-ivory-dim: #e8e4da;
+  --color-paper: #ffffff;
+
+  /* Text */
+  --color-on-dark: #e9ecf4;
+  --color-on-dark-muted: #9ba6c2;
+  --color-on-light: #161b2b;
+  --color-on-light-muted: #53596b;
+
+  /* Typography */
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-mono-brand), ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Motion */
+  --ease-picss: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Breakpoints kept at Tailwind defaults; container handled by .picss-container */
+}
+
+:root {
+  /* Fluid type scale — 375px → 1440px */
+  --step--2: clamp(0.69rem, 0.67rem + 0.09vw, 0.75rem);
+  --step--1: clamp(0.8rem, 0.77rem + 0.14vw, 0.875rem);
+  --step-0: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.12rem + 0.36vw, 1.44rem);
+  --step-2: clamp(1.44rem, 1.3rem + 0.62vw, 1.85rem);
+  --step-3: clamp(1.73rem, 1.5rem + 1vw, 2.37rem);
+  --step-4: clamp(2.07rem, 1.72rem + 1.52vw, 3.05rem);
+  --step-5: clamp(2.49rem, 1.95rem + 2.3vw, 3.9rem);
+  --step-6: clamp(2.99rem, 2.17rem + 3.5vw, 5rem);
+
+  /* Hairlines — the structural signature of the design */
+  --rule-on-dark: rgba(233, 236, 244, 0.14);
+  --rule-on-dark-strong: rgba(233, 236, 244, 0.26);
+  --rule-on-light: rgba(22, 27, 43, 0.12);
+  --rule-on-light-strong: rgba(22, 27, 43, 0.24);
+
+  --header-height: 4.5rem;
+
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+* {
+  min-width: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Anchor targets clear the fixed header */
+  scroll-padding-top: calc(var(--header-height) + 1.5rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-ink-800);
+  color: var(--color-on-dark);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background-color: var(--color-picss-red);
+  color: #fff;
+}
+
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+
+.picss-container {
+  width: 100%;
+  max-width: 85rem; /* 1360px */
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 0.8rem + 2vw, 3rem);
+}
+
+.picss-container-narrow {
+  width: 100%;
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 0.8rem + 2vw, 3rem);
+}
+
+.picss-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1.25rem, 0.8rem + 1.6vw, 2.5rem);
+}
+
+.section-pad {
+  padding-block: clamp(4.5rem, 3rem + 6vw, 9rem);
+}
+
+.section-pad-tight {
+  padding-block: clamp(3.5rem, 2.5rem + 4vw, 6.5rem);
+}
+
+/* Measure control */
+.measure {
+  max-width: 68ch;
+}
+.measure-tight {
+  max-width: 54ch;
+}
+
+/* ==========================================================================
+   Typography utilities
+   ========================================================================== */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.03;
+  letter-spacing: -0.021em;
+  text-wrap: balance;
+}
+
+.display-italic {
+  font-style: italic;
+  font-variation-settings: "SOFT" 40;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.lead {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.numeral {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   Interaction
+   ========================================================================== */
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-picss-sky);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Editorial underline that draws in on hover/focus */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.15em;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-picss);
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ==========================================================================
+   Decorative texture — fine grid, used sparingly on dark sections
+   ========================================================================== */
+
+.grid-texture {
+  background-image:
+    linear-gradient(to right, var(--rule-on-dark) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rule-on-dark) 1px, transparent 1px);
+  background-size: 5.5rem 5.5rem;
+}
+
+.grid-texture-light {
+  background-image:
+    linear-gradient(to right, var(--rule-on-light) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rule-on-light) 1px, transparent 1px);
+  background-size: 5.5rem 5.5rem;
+}
+
+/* ==========================================================================
+   No-JS / progressive enhancement safety net
+   Motion applies inline opacity; if JS never runs, reveal everything.
+   ========================================================================== */
+
+.no-js [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* ==========================================================================
+   Ambient keyframes (decorative only; disabled under reduced motion)
+   ========================================================================== */
+
+@keyframes picss-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes picss-pulse-dot {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes picss-sweep {
+  from {
+    stroke-dashoffset: var(--dash, 400);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
