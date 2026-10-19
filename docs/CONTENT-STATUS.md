@@ -73,6 +73,10 @@ approve the geographic source.
   Security Studies" — *Institue* is missing a **t**. This has been left exactly as supplied.
   PICSS should confirm whether to correct the artwork; the site's own text uses the correct
   spelling throughout.
+- **The reversed logo lifts the indigo "C" to `#8C7BF0`.** At the brand indigo `#3D2B9B`
+  the letter is 1.6:1 against the dark header and visually vanishes, leaving the wordmark
+  reading "PiSS". The lifted tone is 5.5:1 and stays in the indigo family. The light-surface
+  logo is unchanged. **PICSS should confirm this reversed-logo treatment.**
 - No official brand guidelines were supplied. The palette was sampled from the logo
   (red `#DC2A1C`, indigo `#3D2B9B`, sky `#5CBDE0`). **Confirm against official brand colours
   if any exist.**

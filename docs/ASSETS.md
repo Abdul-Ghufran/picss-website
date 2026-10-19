@@ -27,12 +27,23 @@ trim. This preserves anti-aliased edges correctly.
 | File | Derivation | Used in |
 |---|---|---|
 | `picss-logo.png` | transparent, trimmed (466×316) | light surfaces |
-| `picss-logo-reversed.png` | as above, with near-black descriptor ink remapped to ivory `#F5F3EE` | dark surfaces — footer |
+| `picss-logo-reversed.png` | as above, with near-black descriptor ink remapped to ivory `#F5F3EE`, and the indigo "C" lifted to `#8C7BF0` | dark surfaces — header and footer |
 | `picss-lockup.png` / `picss-lockup-reversed.png` | top 66.5% crop: globe + "PiCSS" only (466×205) | header — the two-line descriptor is illegible below ~180px wide |
 | `picss-mark.png` | squared, padded mark | app icon source |
 | `src/app/icon.png`, `src/app/apple-icon.png` | 64px and 180px, composited on white | favicon and touch icon |
 
-A reversed logo is standard brand practice, but PICSS should still sign it off.
+### Why the "C" was lifted on dark
+
+The brand indigo `#3D2B9B` is only 1.6:1 against the site's dark ink `#0C1226` — on the
+header the letter effectively disappeared and the wordmark read as **"PiSS"**. The reversed
+variant therefore lifts that one letter to `#8C7BF0` (5.5:1), which stays recognisably in the
+indigo family and remains distinct from the sky-blue world map behind it. Only pixels of the
+"C" are touched: after un-premultiplying, it is the sole cluster with a green channel below
+40, so the map and descriptor are unaffected.
+
+The light-surface logo keeps the original indigo untouched.
+
+A reversed logo is standard brand practice, but PICSS should still sign both adjustments off.
 
 ## Known limitations
 
