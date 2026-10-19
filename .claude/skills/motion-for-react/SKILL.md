@@ -6,7 +6,7 @@ description: Animation patterns for this repository using Motion for React (the 
 # Motion for React — patterns used in this project
 
 Installed: `motion@14.4.0` (the renamed successor to `framer-motion`; `motion/react`
-re-exports the full `framer-motion` surface), `gsap@3.15.0`.
+re-exports the full `framer-motion` surface). GSAP is **not** installed — see section 9.
 
 ## 1. Imports and the client boundary
 
@@ -134,7 +134,9 @@ visualisation are children of that one orchestration so they cannot drift out of
 
 ## 9. GSAP / ScrollTrigger
 
-Only for true scrubbed choreography that `useScroll` cannot express cleanly. If used:
+Not a dependency here, and that is intentional: the only scroll-linked value on the site is
+the timeline rail, which `useScroll` handles. If a genuinely scrubbed sequence ever needs
+it, install it then and follow this shape:
 
 ```tsx
 useEffect(() => {

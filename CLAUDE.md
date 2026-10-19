@@ -47,8 +47,11 @@ export PATH="/c/Users/MABC/AppData/Local/Microsoft/WinGet/Packages/OpenJS.NodeJS
 
 Next.js 16.4.2 (App Router, Turbopack) · React 19.3.1 · TypeScript 5.9 ·
 Tailwind CSS 4.3 (CSS-first `@theme`, no `tailwind.config`) · Motion for React 14.4 ·
-lucide-react · GSAP 3.15 is installed but currently unused — do not reach for it unless a
-scrubbed sequence genuinely needs it.
+lucide-react.
+
+**GSAP is deliberately not a dependency.** The only scroll-linked value on the site is the
+timeline rail, which `useScroll` handles cleanly. Add ScrollTrigger only if a genuinely
+scrubbed sequence needs it — and never let it and Motion drive the same property.
 
 ## Design tokens
 
