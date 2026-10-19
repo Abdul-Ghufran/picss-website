@@ -113,8 +113,8 @@ export function SiteHeader() {
           <Wordmark height={scrolled ? 30 : 36} priority className="transition-all duration-500" />
         </Link>
 
-        <nav aria-label="Primary" className="hidden lg:block">
-          <ul className="flex items-center gap-7">
+        <nav aria-label="Primary" className="hidden xl:block">
+          <ul className="flex items-center gap-6 2xl:gap-7">
             {navigation.map((item) => {
               const isActive = activeSection === item.href.replace("#", "");
               return (
@@ -123,7 +123,7 @@ export function SiteHeader() {
                     href={item.href}
                     aria-current={isActive ? "true" : undefined}
                     className={cn(
-                      "focus-ring link-underline py-2 text-[0.82rem] font-medium tracking-[0.01em] transition-colors duration-300",
+                      "focus-ring link-underline py-2 text-[0.82rem] font-medium tracking-[0.01em] whitespace-nowrap transition-colors duration-300",
                       isActive ? "text-picss-sky" : "text-on-dark-muted hover:text-on-dark",
                     )}
                   >
@@ -138,7 +138,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-3">
           <Link
             href="#contact"
-            className="focus-ring hidden min-h-11 items-center rounded-[3px] bg-picss-red px-5 text-[0.82rem] font-medium text-white transition-colors duration-300 hover:bg-picss-red-deep sm:inline-flex"
+            className="focus-ring hidden min-h-11 items-center rounded-[3px] bg-picss-red px-5 text-[0.82rem] font-medium whitespace-nowrap text-white transition-colors duration-300 hover:bg-picss-red-deep sm:inline-flex"
           >
             Institutional Enquiries
           </Link>
@@ -149,7 +149,7 @@ export function SiteHeader() {
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
-            className="focus-ring -mr-2 inline-flex size-11 items-center justify-center text-on-dark lg:hidden"
+            className="focus-ring -mr-2 inline-flex size-11 items-center justify-center text-on-dark xl:hidden"
           >
             <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
             {menuOpen ? <X aria-hidden className="size-5" /> : <Menu aria-hidden className="size-5" />}
@@ -166,7 +166,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, y: 0 }}
             exit={prefersReduced ? { opacity: 1 } : { opacity: 0, y: -12 }}
             transition={{ duration: prefersReduced ? 0 : 0.32, ease: EASE }}
-            className="border-t border-[color:var(--rule-on-dark)] bg-ink-900 lg:hidden"
+            className="border-t border-[color:var(--rule-on-dark)] bg-ink-900 xl:hidden"
           >
             <nav aria-label="Mobile" className="picss-container py-6">
               <ul className="divide-y divide-[color:var(--rule-on-dark)]">
