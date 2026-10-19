@@ -52,6 +52,30 @@ ScrollTrigger:
 `prefers-reduced-motion` and in the no-JS fallback. A reveal without it can hide content
 permanently if JS fails — treat a missing `data-reveal` as a bug.
 
+### The mask-reveal deadlock — read before writing any clipped reveal
+
+**Never put the viewport trigger on an element that its own hidden state clips out of view.**
+
+A child translated 100% down inside an `overflow-hidden` parent has an *empty intersection
+rect*. IntersectionObserver therefore never reports it visible, `whileInView` never fires,
+and the element stays hidden forever. This stranded all nine section headlines on this site
+until it was caught in a real browser. A clip-path `inset(100%)` hidden state deadlocks the
+same way.
+
+The fix is structural: trigger on the outer, unclipped wrapper and let the inner element
+animate by variant propagation. `MaskReveal` in `src/components/motion/Reveal.tsx` does
+exactly this — use it rather than hand-rolling a clipped reveal.
+
+### Reveals must survive late hydration
+
+`whileInView` only ever fires on an *intersection*. If Motion mounts after the reader has
+already scrolled past an element — a deep link to an anchor, or a fast scroll on a slow
+connection — that element never intersects again and its content is lost.
+
+`Reveal`, `MaskReveal` and `Stagger` therefore pair `useInView` with a mount check that
+reveals immediately when the element is already above the viewport. Any new reveal primitive
+must do the same.
+
 Stagger lists with a parent/child pair rather than per-item delays:
 
 ```tsx
@@ -149,7 +173,30 @@ useEffect(() => {
 Never let GSAP and Motion animate the same element or property. Register plugins inside the
 effect, not at module scope (it breaks SSR).
 
-## 10. Performance checklist
+## 10. Verifying motion
+
+The desktop app's browser pane does **not** run requestAnimationFrame or IntersectionObserver
+while it is hidden, so scroll-triggered motion cannot be observed there at all — a raw
+IntersectionObserver on a fully visible element returns zero callbacks. Do not conclude from
+that that reveals are broken, and do not conclude that they work either.
+
+Verify with the Playwright suite instead, which runs a real Chromium:
+
+```bash
+npm run test:motion
+```
+
+`tests/motion.spec.ts` asserts that every `[data-reveal]` element resolves after a scroll
+(including on a short viewport), that the hero entrance finishes without layout shift, that
+the timeline rail fills, that reduced motion leaves nothing hidden and nothing animating, and
+that there are no console errors or failed requests. `tests/focus.spec.ts` tabs through with a
+real keyboard — `element.focus()` does not reliably set `:focus-visible`, so a programmatic
+focus test can pass while the real ring is missing.
+
+Add a test here whenever you add a motion pattern. A reveal that cannot be asserted is a
+reveal that can silently strand content.
+
+## 11. Performance checklist
 
 - Animate `opacity` and `transform` only.
 - No `will-change` sprayed across the page; let the compositor decide.

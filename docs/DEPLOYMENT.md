@@ -17,6 +17,19 @@ Checks that must pass before any deploy:
 npm run lint && npm run typecheck && npm run build
 ```
 
+And, with the dev server running, the motion and accessibility suite:
+
+```bash
+npm run test:motion
+```
+
+Sixteen checks in a real Chromium: every scroll reveal resolves (including on a short
+viewport), the hero entrance finishes with zero layout shift, the timeline rail fills at
+mobile and desktop widths, keyboard focus is visible on every control type, the mobile menu
+traps focus and returns it on Escape, reduced motion leaves all content present and nothing
+animating, there are no console errors or failed requests, and there is no horizontal
+overflow at 375/768/1024/1440.
+
 ## Environment variables
 
 Copy `.env.example` to `.env.local` (local) or set in the hosting platform.

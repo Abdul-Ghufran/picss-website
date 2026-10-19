@@ -185,6 +185,13 @@ body {
   outline: 2px solid var(--color-picss-sky);
   outline-offset: 3px;
   border-radius: 2px;
+  /*
+    Tailwind v4's `transition-colors` includes `outline-color`, which made the focus ring
+    fade in from the element's text colour over 300ms. A keyboard focus indicator must be
+    immediate, so outline-color is dropped from the transition list here.
+  */
+  transition-property: color, background-color, border-color, text-decoration-color, fill,
+    stroke;
 }
 
 /* Guarantees a 44px pointer target without changing visual size */

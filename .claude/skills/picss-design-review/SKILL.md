@@ -23,6 +23,21 @@ Open the site in the built-in browser pane (`mcp__Claude_Browser__preview_start`
 `navigate`). Prefer `read_page` / `get_page_text` for structure and copy; use screenshots for
 composition, rhythm and colour.
 
+## 0b. Run the automated suite first
+
+```bash
+npm run test:motion
+```
+
+Sixteen checks in a real Chromium cover what the pane cannot: reveal completeness, hero
+entrance and layout shift, the timeline rail, keyboard focus, reduced motion, console and
+network health, and overflow at all four breakpoints. Run it before reviewing by eye, and
+again after any fix — it is faster and more reliable than screenshots, and the pane cannot
+observe scroll motion at all while hidden.
+
+Eyeball review then covers what tests cannot judge: composition, rhythm, typography, colour
+discipline and whether the thing looks like a serious research institute.
+
 ## 1. Breakpoints — all four, every time
 
 `resize_window` to each, reload, then screenshot top-to-bottom:

@@ -1,9 +1,9 @@
 import { internship } from "@/content/site";
-import { Reveal } from "@/components/motion/Reveal";
+import { MaskReveal, Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { PendingNotice } from "@/components/ui/PendingNotice";
 import { ActionButton } from "@/components/ui/Button";
-import { maskUp, ruleDraw } from "@/lib/motion";
+import { ruleDraw } from "@/lib/motion";
 
 /**
  * A narrow, centred inset on dark — a deliberate pause in the page rhythm between the
@@ -30,13 +30,11 @@ export function InternshipSection() {
           {null}
         </Reveal>
 
-        <div className="mt-8 overflow-hidden text-center">
-          <Reveal variants={maskUp}>
-            <h2 className="display mx-auto max-w-[16ch] text-[length:var(--step-4)] text-on-dark">
-              {internship.headline}
-            </h2>
-          </Reveal>
-        </div>
+        <MaskReveal className="mt-8 text-center">
+          <h2 className="display mx-auto max-w-[16ch] text-[length:var(--step-4)] text-on-dark">
+            {internship.headline}
+          </h2>
+        </MaskReveal>
 
         <Reveal>
           <p className="mx-auto mt-7 max-w-[62ch] text-center text-[length:var(--step-0)] leading-[1.75] text-on-dark-muted">

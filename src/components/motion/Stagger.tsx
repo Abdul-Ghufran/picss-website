@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
-import type { ElementType, ReactNode } from "react";
+import { motion, useInView, useReducedMotion, type Variants } from "motion/react";
+import { useEffect, useRef, useState, type ElementType, type ReactNode } from "react";
 import { fadeUp, resolve, staggerParent, viewport, viewportLoose } from "@/lib/motion";
 
 interface StaggerProps {
@@ -14,7 +14,12 @@ interface StaggerProps {
   loose?: boolean;
 }
 
-/** Parent orchestrator. Pair with <StaggerItem> children. */
+/**
+ * Parent orchestrator. Pair with <StaggerItem> children.
+ *
+ * Like `Reveal`, this also reveals immediately when hydration lands after the reader has
+ * already scrolled past — `whileInView` alone would strand the whole group.
+ */
 export function Stagger({
   children,
   className,
@@ -23,14 +28,24 @@ export function Stagger({
   delayChildren = 0.05,
   loose = false,
 }: StaggerProps) {
+  const config = loose ? viewportLoose : viewport;
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, amount: config.amount, margin: config.margin });
+  const [alreadyPassed, setAlreadyPassed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (el && el.getBoundingClientRect().top < 0) setAlreadyPassed(true);
+  }, []);
+
   const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
 
   return (
     <MotionTag
+      ref={ref as React.RefObject<HTMLDivElement>}
       className={className}
       initial="hidden"
-      whileInView="visible"
-      viewport={loose ? viewportLoose : viewport}
+      animate={inView || alreadyPassed ? "visible" : "hidden"}
       variants={staggerParent(stagger, delayChildren)}
     >
       {children}

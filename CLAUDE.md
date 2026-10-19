@@ -42,6 +42,7 @@ export PATH="/c/Users/MABC/AppData/Local/Microsoft/WinGet/Packages/OpenJS.NodeJS
 | `npm run build` | production build — must pass before any change is done |
 | `npm run lint` | ESLint (flat config, `eslint-config-next` v16 native) |
 | `npm run typecheck` | `tsc --noEmit` |
+| `npm run test:motion` | Playwright motion/a11y suite in a real Chromium (needs the dev server running) |
 
 ## Stack
 
@@ -99,11 +100,20 @@ and kept as low in the tree as possible.
 1440 with no horizontal overflow; tab order visible and sensible; reduced motion leaves all
 content present and static; `docs/CONTENT-STATUS.md` still accurate.
 
+## Two traps that already bit once
+
+- **Never put a viewport trigger on an element its own hidden state clips away.** A child
+  translated 100% inside an `overflow-hidden` parent has an empty intersection rect, so
+  `whileInView` can never fire. Use `MaskReveal`, which triggers on the unclipped wrapper.
+- **Tailwind v4's `transition-colors` includes `outline-color`**, which made the focus ring
+  fade in over 300ms. `.focus-ring:focus-visible` now opts outline-color out of the
+  transition; keep it that way.
+
 ## Known environment limitation
 
 The in-app browser pane does not run `requestAnimationFrame` or IntersectionObserver while
 it is hidden, so scroll-triggered motion **cannot be observed there** — reveals will appear
 stuck at their hidden state. That is a pane artifact, not a site defect. To review
 composition in that state, inject
-`[data-reveal]{opacity:1!important;transform:none!important;}`. Live motion playback needs
-a real browser window.
+`[data-reveal]{opacity:1!important;transform:none!important;}`. For actual motion
+verification use `npm run test:motion`, which drives a real Chromium.

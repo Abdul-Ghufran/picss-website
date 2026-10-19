@@ -28,6 +28,7 @@ Then open http://localhost:3000 (the dev server falls back to 3001 if 3000 is ta
 | `npm start` | serve the production build |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript, no emit |
+| `npm run test:motion` | Playwright motion & accessibility suite (start `npm run dev` first) |
 
 ## Stack
 

@@ -1,6 +1,6 @@
 import { cn } from "@/lib/cn";
-import { Reveal } from "@/components/motion/Reveal";
-import { maskUp, ruleDraw } from "@/lib/motion";
+import { MaskReveal, Reveal } from "@/components/motion/Reveal";
+import { ruleDraw } from "@/lib/motion";
 
 type Tone = "light" | "dark";
 
@@ -51,20 +51,18 @@ export function SectionHeading({
         {null}
       </Reveal>
 
-      <div className="mt-7 overflow-hidden">
-        <Reveal variants={maskUp}>
-          <Tag
-            className={cn(
-              "display",
-              strong,
-              align === "wide" ? "max-w-[22ch]" : "max-w-[18ch]",
-              level === "h1" ? "text-[length:var(--step-6)]" : "text-[length:var(--step-4)]",
-            )}
-          >
-            {headline}
-          </Tag>
-        </Reveal>
-      </div>
+      <MaskReveal className="mt-7">
+        <Tag
+          className={cn(
+            "display",
+            strong,
+            align === "wide" ? "max-w-[22ch]" : "max-w-[18ch]",
+            level === "h1" ? "text-[length:var(--step-6)]" : "text-[length:var(--step-4)]",
+          )}
+        >
+          {headline}
+        </Tag>
+      </MaskReveal>
     </div>
   );
 }
